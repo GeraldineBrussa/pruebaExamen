@@ -1,3 +1,4 @@
+import { useState } from "react";
 import React from "react";
 // El componente Post no tiene componentes hijos.
 // ESTADO: Post debe tener un número para almacenar la cantidad de likes, la misma se la defina el padre a la hora de crearlo.
@@ -13,19 +14,25 @@ import React from "react";
 //    h5    (este h5 debe mostrar la cantidad de likes, pero si la misma es mayor a 10 debe decir "Más de 10 likes")
 
 export default function Post({ post, contador }) {
+  const [likePost, setLikePost] = useState(0);
+  const countLike = () => {
+    contador();
+    setLikePost(likePost + 1);
+    console.log("Suma 1 Like:" + post.titulo);
+  };
+  const mostrarLike = likePost < 10 ? likePost : "Más de 10 likes";
   return (
     <div className="posteo">
       <h3>{post.titulo}</h3>
       <p>{post.texto}</p>
       <button
         onClick={() => {
-          contador();
-          setLike(like + 1);
+          countLike();
         }}
       >
-        Like
+        👍
       </button>
-      <h5></h5>
+      <h5>Like: {mostrarLike}</h5>
     </div>
   );
 }
